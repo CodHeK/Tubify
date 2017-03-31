@@ -30,6 +30,37 @@
 			color: black;
 			filter: alpha (opacity=65);
 		}
+
+		#results li {
+			padding: 10px 0;
+			border-bottom: 1px #ccc dotted;
+			list-style: none;
+			overflow: auto;
+		}
+
+		.list-left {
+			float: left;
+			width: 20%;
+		}
+
+		.list-left img {
+			width: 100%;
+			padding: 3px;
+			border:solid #ccc 1px;
+		}
+
+		.list-right {
+			float: right;
+			width: 78%;
+		}
+
+		.cTitile {
+			color: #dd2826;
+		}
+
+		.clearfix {
+			clear: both;
+		}
 	</style>
 
 </head>
@@ -40,7 +71,7 @@
 		<table style="width:100%;"> 
 		<tr>
 		<td>
-		<form class="form-group"> 
+		<form class="form-group" id="search-form"> 
 			<input type="search" class="form-control" id="query" placeholder="Search your Video..." style="width:85%;height:45px;">
 		</form>
 		</td>
@@ -48,11 +79,8 @@
 		<button class="btn btn-default btn-lg" id="search" style="margin-bottom:16px;">Tubify !</button>
 		</td>
 		</tr>
-	</div>
-	<div class="container">
-		<div >
-			
-		</div>
+		</table>
+		<ul id="results"></ul>
 	</div>
 </body>
 </html>
