@@ -2,10 +2,12 @@ $(document).ready(function() {
 	$("#search-form").submit(function(e) {
 		e.preventDefault();
 	});
+	$("#span").hide();
 	$("#search").click(function() {
 		var val = $("#query").val();
 		if(val == '') {
 			$("#query").css('box-shadow', 'inset 0 1px 2px rgba(0,0,0,0.1), 0 0 0 6px #dd2826');
+			$("#results").html('');
 		}
 		else {
 			$("#query").css('box-shadow', 'inset 0 1px 2px rgba(0,0,0,0.1), 0 0 0 6px #f0f0f0');
@@ -40,17 +42,20 @@ function getOutput(item) {
 	var channelTitle = item.snippet.channelTitle;
 	var videoDate = item.snippet.publishedAt;
 
+	// $('#tit').html(title);
+	// $("#owner").html(channelTitle);
+	// $("#date").html(videoDate);
+	// $("#desp").html(description);
 	var output = '<li>' + 
 	'<div class="list-left">' +
 	'<img src="'+thumb+'">' +
-	'</div>' +
+	'</div>'+
 	'<div class="list-right">' +
-	'<h3>' + title + '</h3>'
-	'<small>By <span class="cTitle">' +channelTitle+'</span> on '+videoDate+'</small>' +
-	'<p>' +description+'</p>' +
-	'</div>' +
+	'<h3><a class="fancybox fancybox.iframe" href="http://www.youtube.com/embed/'+videoId+'">' +title+ '</a></h3>'
+	'<small>By <span class="cTitle">'+channelTitle+'</span> on '+videoDate+'</small>' +
+	'<p>'+description+'</p>' +
+	'</div>'+
 	'</li>' +
-	'<div class="clearfix"></div>' +
 	'';
 
 	return output;
