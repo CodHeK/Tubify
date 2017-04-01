@@ -100,15 +100,17 @@
 	<div class="container">
 		<h1 id="header"><i class="fa fa-video-camera" aria-hidden="true" style="color:#dd2826;"></i>&nbsp&nbspTubify <sub style="font-size:14px;">"Quick way to search Top 5 YouTube videos without any Ads !"</sub></h1>
 		<hr style="width:100%;">
+	<div id="display">
 		<table style="width:100%;"> 
 		<tr>
-		<td>
+		<td style="width:75%;">
 		<form class="form-group" id="search-form"> 
 			<input type="search" class="form-control" id="query" placeholder="Search your Video..." style="width:85%;height:45px;">
 		</form>
 		</td>
 		<td>
 		<button class="btn btn-default btn-lg" id="search" style="margin-bottom:16px;">Tubify !</button>
+		<button class="btn btn-default btn-lg" id="hist" style="margin-bottom:16px;">Search History</button>
 		</td>
 		</tr>
 		</table>
@@ -116,6 +118,15 @@
 		<div class="footer">
 			<h4 style="text-align:center;font-family:Raleway;font-size:15px;">Copyright &copy; 2017, All Rights Reserved, <b>TUBIFY</b></h4>
 		</div>
+	</div>
+   </div>
+	<div id="history">
+		<button class="btn btn-default btn-lg" id="return" style="margin-bottom:16px;margin-left:80%;">Back</button>
+		<h2 style="margin-left:10%;padding-bottom:30px;">Search History</h2>
+		<hr style="width:80%;">
+		<ul id="s_history" style="margin-left:10%;list-style:none;font-size:25px;font-weight:600;">
+			<li></li>
+		</ul>
 	</div>
 </body>
 </html>
