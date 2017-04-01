@@ -4,6 +4,7 @@ $(document).ready(function() {
 	});
 	var content;
 	$("#span").hide();
+	$("#nil").hide();
 	$("#history").hide();
 	$("#search").click(function() {
 		var val = $("#query").val();
@@ -39,7 +40,12 @@ $(document).ready(function() {
 	$("#hist").click(function() {
 		$("#display").fadeOut(1000);
 		$("#history").show(1000);
-		$("#s_history").append('<br><br>' + content + " " + "______________________" + " " + new Date($.now()));
+		if(content != '') {
+			$("#s_history").append('<br><br>' + content + " " + "______________________" + " " + new Date($.now()));
+		}
+		else {
+			$("#nil").show(1000);
+		}
 
 	});
 
