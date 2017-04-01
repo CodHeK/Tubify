@@ -40,18 +40,22 @@ $(document).ready(function() {
 	$("#hist").click(function() {
 		$("#display").fadeOut(1000);
 		$("#history").show(1000);
-		if(content != '') {
+		// if(content != '') {
 			$("#s_history").append('<br><br>' + content + " " + "______________________" + " " + new Date($.now()));
-		}
-		else {
-			$("#nil").show(1000);
-		}
+		
+		// else {
+		// 	$("#nil").show(1000);
+		// }
 
 	});
 
 	$("#return").click(function() {
 		$("#history").fadeOut(1000);
 		$("#display").show(1000);
+	});
+
+	$("#clear").click(function() {
+		$("#s_history").html('');
 	});
 });
 
