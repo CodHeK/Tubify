@@ -3,8 +3,20 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 	$("#span").hide();
+	$("#history").hide();
 	$("#search").click(function() {
 		var val = $("#query").val();
+		$("#hist").click(function() {
+		$("#display").fadeOut(1000);
+		$("#history").show(1000);
+		$("#s_history").append(val + " " + "______________________" + " " + new Date($.now()) + '<br><br>');
+
+	});
+
+	$("#return").click(function() {
+		$("#history").fadeOut(1000);
+		$("#display").show(1000);
+	});
 		if(val == '') {
 			$("#query").css('box-shadow', 'inset 0 1px 2px rgba(0,0,0,0.1), 0 0 0 6px #dd2826');
 			$("#results").html('');
@@ -30,7 +42,6 @@ $(document).ready(function() {
 
 				 		}
 			);
-			$("#query").val('');
 		}
 	});
 });
