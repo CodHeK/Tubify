@@ -1,133 +1,101 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Tubify</title>
-	<link rel="shortcut icon" href="f1.png" type="image/x-icon" />
-	<link rel="stylesheet" href="css/jquery.fancybox.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-	<script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".fancybox").fancybox();
-		});
-	</script>
-
-	<style type="text/css">
-		#header {
-			font-size: 4.5em;
-			color: black;
-			font-family: Raleway;
-			margin-left: 4%;
+$(document).ready(function() {
+	$("#search-form").submit(function(e) {
+		e.preventDefault();
+	});
+	var content;
+	$("#span").hide();
+	$("#nil").hide();
+	$("#history").hide();
+	$("#search").click(function() {
+		var val = $("#query").val();
+		content = val;
+		if(val == '') {
+			$("#query").css('box-shadow', 'inset 0 1px 2px rgba(0,0,0,0.1), 0 0 0 6px #dd2826');
+			$("#results").html('');
 		}
+		else {
+			$("#query").css('box-shadow', 'inset 0 1px 2px rgba(0,0,0,0.1), 0 0 0 6px #f0f0f0');
+			$("#results").html('');
+			$.get(
 
-		body {
-			background-color: #f7fefd;
-			font-family: Raleway;
+				 "https://www.googleapis.com/youtube/v3/search", {
+				 		part: 'snippet, id',
+				 		q: encodeURIComponent($("#query").val()).replace(/%20/g, "+"),
+				 		type: 'video',
+				 		key: 'AIzaSyDv3TkvD7OO4S4-wlIGEz_odJG1T5Qrbao' },
+
+				 		function(data) {
+				 			$.each(data.items, function(i,item) {
+
+				 				var output = getOutput(item);
+
+				 				$("#results").append(output);
+				 			});
+
+				 		}
+			);
 		}
+	});
 
-		a {
-			text-decoration: none;
-			color:black;
-		}
+	$("#hist").click(function() {
+		$("#display").fadeOut(1000);
+		$("#history").show(1000);
+		// if(content != '') {
+			$("#s_history").append('<br><br>' + content + " " + "______________________" + " " + new Date($.now()));
+		
+		// else {
+		// 	$("#nil").show(1000);
+		// }
 
-		a:hover {
-			text-decoration: none;
-			color: black;
-		}
+	});
 
-		#query {
-			box-shadow: inset 0 1px 2px rgba(0,0,0,0.1), 0 0 0 6px #f0f0f0;
-			border-radius: 1px;
-			margin-left: 6%;
-		}
+	$("#return").click(function() {
+		$("#history").fadeOut(1000);
+		$("#display").show(1000);
+	});
 
-		#search {
-			opacity: 0.65;
-			color: black;
-			filter: alpha (opacity=65);
-		}
+	$("#clear").click(function() {
+		$("#s_history").html('');
+	});
+});
 
-		#results li {
-			padding: 10px 0;
-			border-bottom: 1px #ccc dotted;
-			list-style: none;
-			overflow: auto;
-		}
+function getOutput(item) {
+	var videoId = item.id.videoId;
+	var title = item.snippet.title;
+	var description = item.snippet.description;
+	var thumb = item.snippet.thumbnails.high.url;
+	var channelTitle = item.snippet.channelTitle;
+	var videoDate = item.snippet.publishedAt;
 
-		.list-left {
-			float: left;
-			width: 20%;
-			margin-right:20px;
-		}
+	// $('#tit').html(title);
+	// $("#owner").html(channelTitle);
+	// $("#date").html(videoDate);
+	// $("#desp").html(description);
+	var output = '<li>' + 
+	'<div class="list-left">' +
+	'<img src="'+thumb+'">' +
+	'</div>'+
+	'<div class="list-right">' +
+	'<h3><a class="fancybox fancybox.iframe" href="http://www.youtube.com/embed/'+videoId+'">' +title+ '</a></h3>' +
+	'<small>By <span class="cTitle">'+channelTitle+'</span> on '+videoDate+'</small><br>' +
+	'<br><p>'+description+'</p>' +
+	'</div>'+
+	'</li>';
+	'';
 
-		.list-left img {
-			width: 100%;
-			padding: 3px;
-			border:solid #ccc 1px;
-		}
+	return output;
+}
 
-		.list-right {
-			float: right;
-			width: 78%;
-			padding-left:5px;
-		}
+// function getButtons(nextPage, prevPage) {
+// 	if(!prevPage) {
+// 		var btnoutput = '<div class="button-container">' +
+// 		'<button id="next-button" class="paging-button" data-token="'+nextPageToken+'" data-query="'+q+'" onclick="nextPage();">Next Page</button></div>';
+// 	}
+// 	else {
+// 		'<div class="button-container">' +
+// 		'<button id="next-button" class="paging-button" data-token="'+prevPageToken+'" data-query="'+q+'" onclick="prevPage();">Prev Page</button>' +
+// 		'<button id="next-button" class="paging-button" data-token="'+nextPageToken+'" data-query="'+q+'" onclick="nextPage();">Next Page</button></div>';
+// 	}
 
-		#owner {
-			color: #dd2826;
-		}
-
-		.cTitle {
-			color:#dd2826;
-			font-size: 12px;
-		}
-
-		#results p {
-			font-size: 15px;
-		}
-
-		#results small {
-			font-size: 12px;
-		}
-	</style>
-
-</head>
-<body>
-	<div class="container">
-		<h1 id="header"><i class="fa fa-video-camera" aria-hidden="true" style="color:#dd2826;"></i>&nbsp&nbspTubify <sub style="font-size:14px;">"Quick way to search Top 5 YouTube videos without any Ads !"</sub></h1>
-		<hr style="width:100%;">
-	<div id="display">
-		<table style="width:100%;"> 
-		<tr>
-		<td style="width:75%;">
-		<form class="form-group" id="search-form"> 
-			<input type="search" class="form-control" id="query" placeholder="Search your Video..." style="width:85%;height:45px;">
-		</form>
-		</td>
-		<td>
-		<button class="btn btn-default btn-lg" id="search" style="margin-bottom:16px;">Tubify !</button>
-		<button class="btn btn-default btn-lg" id="hist" style="margin-bottom:16px;">Search History</button>
-		</td>
-		</tr>
-		</table>
-		<ul id="results"></ul>
-		<div class="footer">
-			<h4 style="text-align:center;font-family:Raleway;font-size:15px;">Copyright &copy; 2017, All Rights Reserved, <b>TUBIFY</b></h4>
-		</div>
-	</div>
-   </div>
-	<div id="history">
-		<button class="btn btn-default btn-lg" id="return" style="margin-bottom:16px;margin-left:80%;">Back</button>
-		<h2 style="margin-left:10%;padding-bottom:30px;">Search History</h2>
-		<hr style="width:80%;">
-		<h3 id="nil">You haven't searched for anything yet !</h3>
-		<ul id="s_history" style="margin-left:10%;list-style:none;font-size:25px;font-weight:600;">
-			<li></li>
-		</ul>
-	</div>
-</body>
-</html>
+// 	return btnoutput;
+// }
