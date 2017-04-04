@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 				 				var output = getOutput(item);
 
-				 				$("#results").append(output);
+				 				$("#results").append(output).fadeIn(1000);
 				 			});
 
 				 		}
@@ -72,13 +72,16 @@ function getOutput(item) {
 	// $("#date").html(videoDate);
 	// $("#desp").html(description);
 	var output = '<li>' + 
-	'<div class="list-left">' +
+	'<div class="list-left col-lg-3 col-md-3 col-sm-12 col-xs-12">' +
 	'<img src="'+thumb+'">' +
 	'</div>'+
-	'<div class="list-right">' +
-	'<h3><a class="fancybox fancybox.iframe" href="http://www.youtube.com/embed/'+videoId+'">' +title+ '</a></h3>' +
+	'<div class="list-right col-lg-3 col-md-3 col-sm-12 col-xs-12">' +
+	'<h3><a class="video" href="http://www.youtube.com/embed/'+videoId+'">' +title+ '</a></h3>' +
 	'<small>By <span class="cTitle">'+channelTitle+'</span> on '+videoDate+'</small><br>' +
 	'<br><p>'+description+'</p>' +
+	'<form type="submit" action="http://www.ssyoutube.com/embed/'+videoId+'">' +
+	'<button class="btn btn-default btn-lg">Download</button>' +
+	'</form>' +
 	'</div>'+
 	'</li>';
 	'';
