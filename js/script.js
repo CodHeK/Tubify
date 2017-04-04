@@ -38,6 +38,7 @@ $(document).ready(function() {
 		}
 	});
 
+
 	$("#hist").click(function() {
 		$("#display").fadeOut(1000);
 		$("#history").show(1000);
@@ -48,7 +49,7 @@ $(document).ready(function() {
 		// 	$("#nil").show(1000);
 		// }
 
-	});
+	});	
 
 	$("#return").click(function() {
 		$("#history").fadeOut(1000);
@@ -74,7 +75,7 @@ function getOutput(item) {
 	// $("#desp").html(description);
 	var output = '<li>' + 
 	'<div class="list-left col-lg-3 col-md-3 col-sm-12 col-xs-12">' +
-	'<img src="'+thumb+'">' +
+	'<a href="http://www.youtube.com/embed/'+videoId+'"><img src="'+thumb+'"></a>' +
 	'</div>'+
 	'<div class="list-right col-lg-3 col-md-3 col-sm-12 col-xs-12">' +
 	'<h3><a class="video" href="http://www.youtube.com/embed/'+videoId+'">' +title+ '</a></h3>' +
