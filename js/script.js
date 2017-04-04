@@ -6,7 +6,8 @@ $(document).ready(function() {
 	$("#span").hide();
 	$("#nil").hide();
 	$("#history").hide();
-	$("#search").click(function() {
+	$(document).keypress(function(event) {
+		if(event.which === 13) {
 		var val = $("#query").val();
 		content = val;
 		if(val == '') {
@@ -37,6 +38,7 @@ $(document).ready(function() {
 			);
 			$("#query").val('');
 		}
+	  }
 	});
 
 
